@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appdeploy
+spec:
+  selector:
+    matchLabels:
+      app: flask
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: appdeploy
+        image: ahmed3sam/devops-task:v1
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        imagePullPolicy: Always    
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
