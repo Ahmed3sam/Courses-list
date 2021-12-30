@@ -1,9 +1,6 @@
 # Using official python runtime base image
 FROM python:3.10-alpine
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends 
-
 # Set the application directory
 WORKDIR /app
 
