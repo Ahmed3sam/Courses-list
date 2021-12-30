@@ -1,6 +1,9 @@
 # Using official python runtime base image
 FROM python:3.10-alpine
 
+apk update
+apk add py-pip
+
 # Set the application directory
 WORKDIR /app
 
