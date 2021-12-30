@@ -19,7 +19,7 @@ class Data(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(100))
     website = db.Column(db.String(100))
-    date = db.Column(db.DateTime)
+    date = db.Column(db.Date())
 
 
     def __init__(self, name, website, date):
@@ -81,7 +81,7 @@ def update():
 
 
 
-#This route is for deleting our employee
+#This route is for deleting our course
 @app.route('/delete/<id>/', methods = ['GET', 'POST'])
 def delete(id):
     my_data = Data.query.get(id)
