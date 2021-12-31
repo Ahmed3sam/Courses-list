@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-backend
+  template:
+    metadata:
+      labels:
+        app: flask-backend
+    spec:
+      containers:
+      - name: flask-app
+        imagePullPolicy: Always
+        image: ahmed3sam/devops-task:v1
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "128Mi"
+        env:
+          - name: SERVICE_POSTGRES_SERVICE_HOST
+            value: service-postgres.default.svc.cluster.local
+          - name: POSTGRES_DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: user
+          - name: POSTGRES_DB_PSW
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: password
+        ports:
+          - containerPort: 5000
