@@ -1,9 +1,9 @@
 # Using official python runtime base image
-FROM python:3.10-alpine
+FROM python:3.9-alpine
 
-RUN apk update \
-  && apk add --virtual build-deps gcc python3-dev musl-dev \
-  && apk add postgresql-dev
+#RUN apk update \
+#  && apk add --virtual build-deps gcc python3-dev musl-dev \
+#  && apk add postgresql-dev
 
 # Install our requirements.txt
 COPY requirements.txt /requirements.txt
@@ -29,4 +29,3 @@ ENTRYPOINT gunicorn \
         --keep-alive=10                        \
         --graceful-timeout=10                  \
         app:app
-

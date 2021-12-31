@@ -1,14 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-
+import os
 
 
 
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-#SqlAlchemy Database Configuration With Mysql
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@db:5432/courses'
+db_user = os.environ.get('POSTGRES_DB_USER')
+db_psw = os.environ.get('POSTGRES_DB_PSW')
+db_host = os.environ.get('SERVICE_POSTGRES_SERVICE_HOST')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{0}:{1}@{2}/courses'.format(
+    db_user, db_psw, db_host
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)

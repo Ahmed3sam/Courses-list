@@ -6,6 +6,10 @@ services:
     ports:
       - "5000:5000"
     restart: always
+    environment:
+      - POSTGRES_DB_USER=postgres
+      - POSTGRES_DB_PSW=admin
+      - SERVICE_POSTGRES_SERVICE_HOST=db
     depends_on:
       - db
   db:
